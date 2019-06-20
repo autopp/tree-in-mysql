@@ -2,3 +2,12 @@ apply plugin: 'java'
 apply plugin: 'application'
 
 mainClassName = 'tree.Main'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.mybatis:mybatis:3.4.4'
+    compile 'mysql:mysql-connector-java:5.1.41'
+}
