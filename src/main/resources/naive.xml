@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tree">
-  <select id="naiveAddDivision" resultType="map">
-    INSERT INTO division_naive (id, name, parent_id) VALUES (#{id}, #{name}, #{parent_id})
+  <select id="naiveAddDivision" parameterType="NaiveDivisionRepository.NaiveDivision" resultType="map">
+    INSERT INTO division_naive (id, name, parent_id) VALUES (#{id}, #{name}, #{parentId})
   </select>
 </mapper>
