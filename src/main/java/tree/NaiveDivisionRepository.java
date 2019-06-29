@@ -1,6 +1,7 @@
 package tree;
 
 import java.util.List;
+import org.apache.ibatis.annotations.Insert;
 
 public class NaiveDivisionRepository {
     public class NaiveDivision {
@@ -13,6 +14,11 @@ public class NaiveDivisionRepository {
             this.name = name;
             this.parentId = parentId;
         }
+    }
+
+    public interface NaiveDivisionMapper {
+        @Insert("INSERT INTO division_naive (id, name, parent_id) VALUES (#{id}, #{name}, #{parentId})")
+        NaiveDivision insertDivision(long id, String name, long parentId);
     }
 
     public void addDivision(long id, String name, long parentId) {
