@@ -10,17 +10,15 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import tree.NaiveDivisionRepository;
+
 public class Main {
     public static void main(String[] args) throws IOException {
         try (InputStream in = Main.class.getResourceAsStream("/mybatis-config.xml")) {
             SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(in);
 
             try (SqlSession session = factory.openSession()) {
-                List<Map<String, Object>> result = session.selectList("tree.selectNaive");
-
-                result.forEach(row -> {
-                    System.out.println(row);
-                });
+                new NaiveDivisionRepository(factory).addDivision(1, "1", null);
             }
         }
     }

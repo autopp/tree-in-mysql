@@ -1,28 +1,32 @@
 package tree;
 
 import java.util.List;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+
 import org.apache.ibatis.annotations.Insert;
 
-public class NaiveDivisionRepository {
+public class NaiveDivisionRepository extends DivisionRepository {
+    public NaiveDivisionRepository(SqlSessionFactory factory) {
+        super(factory);
+    }
+
     public class NaiveDivision {
         public long id;
         public String name;
-        public long parentId;
+        public Long parentId;
 
-        public NaiveDivision(long id, String name, long parentId) {
+        public NaiveDivision(long id, String name, Long parentId) {
             this.id = id;
             this.name = name;
             this.parentId = parentId;
         }
     }
 
-    public interface NaiveDivisionMapper {
-        @Insert("INSERT INTO division_naive (id, name, parent_id) VALUES (#{id}, #{name}, #{parentId})")
-        NaiveDivision insertDivision(long id, String name, long parentId);
-    }
-
-    public void addDivision(long id, String name, long parentId) {
-        throw new UnsupportedOperationException("not supported");
+    public void addDivision(long id, String name, Long parentId) {
+        try (SqlSession session = factory.openSession()) {
+            session.insert("tree.NaiveDivisionMapper.addDivision", new NaiveDivision(id, name, parentId));
+        }
     }
 
     public Division getParentOf(long id) {
