@@ -18,7 +18,8 @@ public class Main {
             SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(in);
 
             try (SqlSession session = factory.openSession()) {
-                new NaiveDivisionRepository(factory).addDivision(1, "1", null);
+                new NaiveDivisionRepository(factory).addDivision(1, "1", 0);
+                session.commit();
             }
         }
     }
