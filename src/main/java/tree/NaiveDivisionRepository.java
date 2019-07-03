@@ -26,6 +26,7 @@ public class NaiveDivisionRepository extends DivisionRepository {
     public void addDivision(long id, String name, long parentId) {
         try (SqlSession session = factory.openSession()) {
             session.insert("tree.NaiveDivisionMapper.addDivision", new NaiveDivision(id, name, parentId));
+            session.commit();
         }
     }
 

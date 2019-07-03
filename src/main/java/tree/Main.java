@@ -17,10 +17,7 @@ public class Main {
         try (InputStream in = Main.class.getResourceAsStream("/mybatis-config.xml")) {
             SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(in);
 
-            try (SqlSession session = factory.openSession()) {
-                new NaiveDivisionRepository(factory).addDivision(1, "1", 0);
-                session.commit();
-            }
+            new NaiveDivisionRepository(factory).addDivision(1, "1", 0);
         }
     }
 }
