@@ -2,10 +2,8 @@ package tree;
 
 public class Division {
     public long id;
-    public String name;
 
-    public Division(long id, String name) {
+    public Division(long id) {
         this.id = id;
-        this.name = name;
     }
 }
