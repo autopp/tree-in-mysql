@@ -1,6 +1,7 @@
 package tree;
 
 import java.util.List;
+import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
@@ -12,35 +13,38 @@ public class NaiveDivisionRepository extends DivisionRepository {
     }
 
     public class NaiveDivision {
-        public long id;
-        public Long parentId;
+        public int id;
+        public Integer parentId;
 
-        public NaiveDivision(long id, Long parentId) {
+        public NaiveDivision(int id, Integer parentId) {
             this.id = id;
             this.parentId = parentId;
         }
     }
 
-    public void addDivision(long id, Long parentId) {
+    public void addDivision(int id, Integer parentId) {
         try (SqlSession session = factory.openSession()) {
             session.insert("tree.NaiveDivisionMapper.addDivision", new NaiveDivision(id, parentId));
             session.commit();
         }
     }
 
-    public Division getParentOf(long id) {
+    public Division getParentOf(int id) {
+        try (SqlSession session = factory.openSession()) {
+            Map<String, Object> result = session.selectOne("tree.NaiveDivisionMapper.getParentOf", id);
+            return new Division((Integer)result.get("id"));
+        }
+    }
+
+    public List<Division> getAncestorsOf(int id) {
         throw new UnsupportedOperationException("not supported");
     }
 
-    public List<Division> getAncestorsOf(long id) {
+    public List<Division> getChildsOf(int id) {
         throw new UnsupportedOperationException("not supported");
     }
 
-    public List<Division> getChildsOf(long id) {
-        throw new UnsupportedOperationException("not supported");
-    }
-
-    public List<Division> getDescendantsOf(long id) {
+    public List<Division> getDescendantsOf(int id) {
         throw new UnsupportedOperationException("not supported");
     }
 }

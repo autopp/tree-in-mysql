@@ -9,9 +9,9 @@ public abstract class DivisionRepository {
         this.factory = factory;
     };
 
-    abstract public void addDivision(long id, Long parentId);
-    abstract public Division getParentOf(long id);
-    abstract public List<Division> getAncestorsOf(long id);
-    abstract public List<Division> getChildsOf(long id);
-    abstract public List<Division> getDescendantsOf(long id);
+    abstract public void addDivision(int id, Integer parentId);
+    abstract public Division getParentOf(int id);
+    abstract public List<Division> getAncestorsOf(int id);
+    abstract public List<Division> getChildsOf(int id);
+    abstract public List<Division> getDescendantsOf(int id);
 }
