@@ -6,7 +6,7 @@
   <insert id="addDivision" parameterType="tree.NaiveDivisionRepository$NaiveDivision">
     INSERT INTO division_naive (id, parent_id) VALUES (#{id}, #{parentId});
   </insert>
-  <select id="getParentOf" resultType="map">
+  <select id="getParentOf" resultType="tree.NaiveDivisionRepository$NaiveDivision">
     SELECT d1.id, d1.parent_id FROM division_naive d1 LEFT OUTER JOIN division_naive d2 ON d1.id = d2.parent_id WHERE d2.id = #{id};
   </select>
 </mapper>

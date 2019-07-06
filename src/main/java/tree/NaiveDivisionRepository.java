@@ -12,7 +12,7 @@ public class NaiveDivisionRepository extends DivisionRepository {
         super(factory);
     }
 
-    public class NaiveDivision {
+    public static class NaiveDivision {
         public int id;
         public Integer parentId;
 
@@ -31,8 +31,8 @@ public class NaiveDivisionRepository extends DivisionRepository {
 
     public Division getParentOf(int id) {
         try (SqlSession session = factory.openSession()) {
-            Map<String, Object> result = session.selectOne("tree.NaiveDivisionMapper.getParentOf", id);
-            return new Division((Integer)result.get("id"));
+            NaiveDivision result = session.selectOne("tree.NaiveDivisionMapper.getParentOf", id);
+            return new Division(result.id);
         }
     }
 
