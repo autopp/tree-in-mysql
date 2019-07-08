@@ -1,5 +1,6 @@
 package tree;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
@@ -37,7 +38,19 @@ public class NaiveDivisionRepository extends DivisionRepository {
     }
 
     public List<Division> getAncestorsOf(int id) {
-        throw new UnsupportedOperationException("not supported");
+        List<Division> list = new ArrayList<Division>();
+
+        int i = id;
+        while (true) {
+            Division ancestor = getParentOf(i);
+            if (ancestor == null) {
+                break;
+            }
+            list.add(ancestor);
+            i = ancestor.id;
+        }
+
+        return list;
     }
 
     public List<Division> getChildsOf(int id) {

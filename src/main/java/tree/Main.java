@@ -20,7 +20,8 @@ public class Main {
             DivisionRepository repo = new NaiveDivisionRepository(factory);
             repo.addDivision(1, null);
             repo.addDivision(2, 1);
-            System.out.println(repo.getParentOf(2));
+            repo.addDivision(3, 2);
+            System.out.println(repo.getAncestorsOf(3));
         }
     }
 }
