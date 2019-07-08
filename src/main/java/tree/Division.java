@@ -1,9 +1,9 @@
 package tree;
 
 public class Division {
-    public long id;
+    public int id;
 
-    public Division(long id) {
+    public Division(int id) {
         this.id = id;
     }
 }
