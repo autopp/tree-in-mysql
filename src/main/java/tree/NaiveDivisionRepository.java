@@ -3,6 +3,7 @@ package tree;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
@@ -54,7 +55,10 @@ public class NaiveDivisionRepository extends DivisionRepository {
     }
 
     public List<Division> getChildsOf(int id) {
-        throw new UnsupportedOperationException("not supported");
+        try (SqlSession session = factory.openSession()) {
+            List<Integer> ids = session.selectList("tree.NaiveDivisionMapper.getChildsOf", id);
+            return ids.stream().map((i) -> new Division(i)).collect(Collectors.toList());
+        }
     }
 
     public List<Division> getDescendantsOf(int id) {
