@@ -33,8 +33,8 @@ public class NaiveDivisionRepository extends DivisionRepository {
 
     public Division getParentOf(int id) {
         try (SqlSession session = factory.openSession()) {
-            NaiveDivision result = session.selectOne("tree.NaiveDivisionMapper.getParentOf", id);
-            return result == null ? null : new Division(result.id);
+            Integer result = session.selectOne("tree.NaiveDivisionMapper.getParentOf", id);
+            return result == null ? null : new Division(result);
         }
     }
 
