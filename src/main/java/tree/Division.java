@@ -6,4 +6,8 @@ public class Division {
     public Division(int id) {
         this.id = id;
     }
+
+    public String toString() {
+        return "{id=" + id + "}";
+    }
 }
