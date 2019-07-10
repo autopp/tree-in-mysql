@@ -62,6 +62,12 @@ public class NaiveDivisionRepository extends DivisionRepository {
     }
 
     public List<Division> getDescendantsOf(int id) {
-        throw new UnsupportedOperationException("not supported");
+        List<Division> list = new ArrayList<Division>();
+
+        List<Division> childs = getChildsOf(id);
+        list.addAll(childs);
+        list.addAll(childs.stream().flatMap((c) -> getDescendantsOf(c.id).stream()).collect(Collectors.toList()));
+
+        return list;
     }
 }

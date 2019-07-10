@@ -24,6 +24,8 @@ public class Main {
             repo.addDivision(4, 2);
             System.out.println(repo.getAncestorsOf(3));
             System.out.println(repo.getChildsOf(2));
+            System.out.println(repo.getDescendantsOf(1));
+            System.out.println(repo.getDescendantsOf(2));
         }
     }
 }
