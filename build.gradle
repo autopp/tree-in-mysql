@@ -10,4 +10,12 @@ repositories {
 dependencies {
     compile 'org.mybatis:mybatis:3.4.4'
     compile 'mysql:mysql-connector-java:5.1.41'
+    testImplementation('org.junit.jupiter:junit-jupiter:5.5.0')
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
 }
