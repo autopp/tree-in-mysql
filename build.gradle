@@ -12,6 +12,7 @@ dependencies {
     compile 'mysql:mysql-connector-java:5.1.41'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
     testImplementation 'org.hamcrest:hamcrest:2.1'
+    testImplementation 'com.ninja-squad:DbSetup:2.1.0'
 }
 
 test {
