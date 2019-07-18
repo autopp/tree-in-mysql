@@ -35,6 +35,16 @@ class DivisionRepositoryTestBase {
         dest = new DriverManagerDestination(URL, USER, PASSWORD);
     }
 
+    /**
+     * Create data set
+     * 1-+-2
+     *   |
+     *   +-3-4
+     *     |
+     *     +-5
+    */
+    abstract void setup();
+
     @Test
     void getParentOf() {
         dbSetupTracker.skipNextLaunch();
