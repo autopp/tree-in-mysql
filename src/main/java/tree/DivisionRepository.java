@@ -10,8 +10,8 @@ public abstract class DivisionRepository {
     };
 
     abstract public void addDivision(int id, Integer parentId);
-    abstract public Division getParentOf(int id);
-    abstract public List<Division> getAncestorsOf(int id);
-    abstract public List<Division> getChildsOf(int id);
-    abstract public List<Division> getDescendantsOf(int id);
+    abstract public Integer getParentOf(int id);
+    abstract public List<Integer> getAncestorsOf(int id);
+    abstract public List<Integer> getChildsOf(int id);
+    abstract public List<Integer> getDescendantsOf(int id);
 }

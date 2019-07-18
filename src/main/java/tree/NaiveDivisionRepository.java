@@ -31,42 +31,40 @@ public class NaiveDivisionRepository extends DivisionRepository {
         }
     }
 
-    public Division getParentOf(int id) {
+    public Integer getParentOf(int id) {
         try (SqlSession session = factory.openSession()) {
-            Integer result = session.selectOne("tree.NaiveDivisionMapper.getParentOf", id);
-            return result == null ? null : new Division(result);
+            return session.selectOne("tree.NaiveDivisionMapper.getParentOf", id);
         }
     }
 
-    public List<Division> getAncestorsOf(int id) {
-        List<Division> list = new ArrayList<Division>();
+    public List<Integer> getAncestorsOf(int id) {
+        List<Integer> list = new ArrayList<Integer>();
 
         int i = id;
         while (true) {
-            Division ancestor = getParentOf(i);
+            Integer ancestor = getParentOf(i);
             if (ancestor == null) {
                 break;
             }
             list.add(ancestor);
-            i = ancestor.id;
+            i = ancestor;
         }
 
         return list;
     }
 
-    public List<Division> getChildsOf(int id) {
+    public List<Integer> getChildsOf(int id) {
         try (SqlSession session = factory.openSession()) {
-            List<Integer> ids = session.selectList("tree.NaiveDivisionMapper.getChildsOf", id);
-            return ids.stream().map((i) -> new Division(i)).collect(Collectors.toList());
+            return session.selectList("tree.NaiveDivisionMapper.getChildsOf", id);
         }
     }
 
-    public List<Division> getDescendantsOf(int id) {
-        List<Division> list = new ArrayList<Division>();
+    public List<Integer> getDescendantsOf(int id) {
+        List<Integer> list = new ArrayList<Integer>();
 
-        List<Division> childs = getChildsOf(id);
+        List<Integer> childs = getChildsOf(id);
         list.addAll(childs);
-        list.addAll(childs.stream().flatMap((c) -> getDescendantsOf(c.id).stream()).collect(Collectors.toList()));
+        list.addAll(childs.stream().flatMap((c) -> getDescendantsOf(c).stream()).collect(Collectors.toList()));
 
         return list;
     }

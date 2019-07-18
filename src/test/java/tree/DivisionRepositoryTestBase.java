@@ -18,7 +18,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 @Disabled
-class DivisionRepositoryTestBase {
+abstract class DivisionRepositoryTestBase {
     private static final String URL = "jdbc:mysql://localhost/test?useSSL=false";
     private static final String USER = "root";
     private static final String PASSWORD = "";
@@ -48,6 +48,6 @@ class DivisionRepositoryTestBase {
     @Test
     void getParentOf() {
         dbSetupTracker.skipNextLaunch();
-        assertThat(repository.getParentOf(2).id, is(1));
+        assertThat(repository.getParentOf(2), is(Integer.valueOf(1)));
     }
 }
