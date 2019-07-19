@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 
 @Disabled
 abstract class DivisionRepositoryTestBase {
@@ -48,6 +48,7 @@ abstract class DivisionRepositoryTestBase {
     @Test
     void getParentOf() {
         dbSetupTracker.skipNextLaunch();
+        assertThat(repository.getParentOf(1), is(nullValue()));
         assertThat(repository.getParentOf(2), is(Integer.valueOf(1)));
     }
 }
