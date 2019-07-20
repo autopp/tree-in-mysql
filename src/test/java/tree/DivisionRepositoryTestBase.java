@@ -51,4 +51,26 @@ abstract class DivisionRepositoryTestBase {
         assertThat(repository.getParentOf(1), is(nullValue()));
         assertThat(repository.getParentOf(2), is(Integer.valueOf(1)));
     }
+
+    @Test
+    void getAncestorsOf() {
+        dbSetupTracker.skipNextLaunch();
+        assertThat(repository.getAncestorsOf(1), is(empty()));
+        assertThat(repository.getAncestorsOf(2), is(contains(1)));
+        assertThat(repository.getAncestorsOf(5), is(contains(3, 1)));
+    }
+
+    @Test
+    void getChildsOf() {
+        dbSetupTracker.skipNextLaunch();
+        assertThat(repository.getChildsOf(1), is(contains(2, 3)));
+        assertThat(repository.getChildsOf(2), is(empty()));
+    }
+
+    @Test
+    void getDescendantsOf() {
+        dbSetupTracker.skipNextLaunch();
+        assertThat(repository.getDescendantsOf(1), is(contains(2, 3, 4, 5)));
+        assertThat(repository.getDescendantsOf(2), is(empty()));
+    }
 }
