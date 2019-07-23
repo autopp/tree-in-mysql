@@ -16,5 +16,6 @@
   <mappers>
     <mapper resource="mapper.xml"/>
     <mapper resource="naive.xml"/>
+    <mapper resource="path.xml"/>
   </mappers>
 </configuration>
