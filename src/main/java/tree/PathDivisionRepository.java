@@ -1,6 +1,8 @@
 package tree;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -41,7 +43,13 @@ public class PathDivisionRepository extends DivisionRepository {
     }
 
     public List<Integer> getAncestorsOf(int id) {
-        throw new UnsupportedOperationException();
+        try (SqlSession session = factory.openSession()) {
+            String path = session.selectOne("tree.PathDivisionMapper.getPathOf", id);
+            String[] ids = path.split("/");
+            List<Integer> ancestors = Arrays.asList(Arrays.copyOfRange(ids, 0, ids.length - 1)).stream().map(Integer::parseInt).collect(Collectors.toList());
+            Collections.reverse(ancestors);
+            return ancestors;
+        }
     }
 
     public List<Integer> getChildsOf(int id) {
