@@ -9,4 +9,7 @@
   <insert id="addDivision" parameterType="tree.PathDivisionRepository$PathDivision">
     INSERT INTO division_path (id, path) VALUES (#{id}, #{path});
   </insert>
+  <select id="getDescendantsOf" resultType="java.lang.Integer" parameterType="tree.PathDivisionRepository$PathDivision">
+    SELECT id FROM division_path WHERE path LIKE CONCAT(#{path}, '%') AND id != #{id};
+  </select>
 </mapper>

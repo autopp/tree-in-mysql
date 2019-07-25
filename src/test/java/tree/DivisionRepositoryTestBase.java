@@ -70,7 +70,7 @@ abstract class DivisionRepositoryTestBase {
     @Test
     void getDescendantsOf() {
         dbSetupTracker.skipNextLaunch();
-        assertThat(repository.getDescendantsOf(1), is(contains(2, 3, 4, 5)));
+        assertThat(repository.getDescendantsOf(1), is(containsInAnyOrder(2, 3, 4, 5)));
         assertThat(repository.getDescendantsOf(2), is(empty()));
     }
 
