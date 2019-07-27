@@ -54,7 +54,7 @@ public class PathDivisionRepository extends DivisionRepository {
 
     public List<Integer> getChildsOf(int id) {
         try (SqlSession session = factory.openSession()) {
-            throw new UnsupportedOperationException();
+            return session.selectList("tree.PathDivisionMapper.getChildsOf", new PathDivision(id, null));
         }
     }
 

@@ -9,6 +9,12 @@
   <insert id="addDivision" parameterType="tree.PathDivisionRepository$PathDivision">
     INSERT INTO division_path (id, path) VALUES (#{id}, #{path});
   </insert>
+  <select id="getChildsOf" resultType="java.lang.Integer" parameterType="tree.PathDivisionRepository$PathDivision">
+    SELECT other.id FROM division_path AS other
+      INNER JOIN division_path AS own ON own.id = #{id}
+      WHERE other.path LIKE CONCAT(own.path, '%') AND other.id != #{id}
+        AND LENGTH(other.path) - LENGTH(REPLACE(other.path, '/', '')) = LENGTH(own.path) - LENGTH(REPLACE(own.path, '/', '')) + 1;
+  </select>
   <select id="getDescendantsOf" resultType="java.lang.Integer" parameterType="tree.PathDivisionRepository$PathDivision">
     SELECT other.id FROM division_path AS other
       INNER JOIN division_path AS own ON own.id = #{id}
