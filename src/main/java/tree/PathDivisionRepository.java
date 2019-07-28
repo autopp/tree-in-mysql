@@ -44,11 +44,7 @@ public class PathDivisionRepository extends DivisionRepository {
 
     public List<Integer> getAncestorsOf(int id) {
         try (SqlSession session = factory.openSession()) {
-            String path = session.selectOne("tree.PathDivisionMapper.getPathOf", id);
-            String[] ids = path.split("/");
-            List<Integer> ancestors = Arrays.asList(Arrays.copyOfRange(ids, 0, ids.length - 1)).stream().map(Integer::parseInt).collect(Collectors.toList());
-            Collections.reverse(ancestors);
-            return ancestors;
+            return session.selectList("tree.PathDivisionMapper.getAncestorsOf", new PathDivision(id, null));
         }
     }
 
