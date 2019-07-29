@@ -36,9 +36,7 @@ public class PathDivisionRepository extends DivisionRepository {
 
     public Integer getParentOf(int id) {
         try (SqlSession session = factory.openSession()) {
-            String path = session.selectOne("tree.PathDivisionMapper.getPathOf", id);
-            String[] ids = path.split("/");
-            return ids.length == 1 ? null : Integer.parseInt(ids[ids.length - 2]);
+            return session.selectOne("tree.PathDivisionMapper.getParentOf", new PathDivision(id, null));
         }
     }
 
