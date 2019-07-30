@@ -18,18 +18,18 @@ public class PathDivisionRepository extends DivisionRepository {
 
     public static class PathDivision {
         public int id;
-        public String path;
+        public Integer parentId;
 
-        public PathDivision(int id, String path) {
+        public PathDivision(int id, Integer parentId) {
             this.id = id;
-            this.path = path;
+            this.parentId = parentId;
         }
     }
 
     public void addDivision(int id, Integer parentId) {
         try (SqlSession session = factory.openSession()) {
-            String parentPath = parentId == null ? "" : session.selectOne("tree.PathDivisionMapper.getPathOf", parentId);
-            session.insert("tree.PathDivisionMapper.addDivision", new PathDivision(id, parentPath + id + "/"));
+            // String parentPath = parentId == null ? "" : session.selectOne("tree.PathDivisionMapper.getPathOf", parentId);
+            session.insert("tree.PathDivisionMapper.addDivision", new PathDivision(id, parentId));
             session.commit();
         }
     }

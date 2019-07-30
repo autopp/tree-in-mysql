@@ -3,11 +3,8 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tree.PathDivisionMapper">
-  <select id="getPathOf" resultType="java.lang.String">
-    SELECT path FROM division_path WHERE id = #{id};
-  </select>
   <insert id="addDivision" parameterType="tree.PathDivisionRepository$PathDivision">
-    INSERT INTO division_path (id, path) VALUES (#{id}, #{path});
+    INSERT INTO division_path (id, path) SELECT #{id}, CONCAT(parent.path, '/', #{id}) FROM division_path AS parent where parent.id = #{parentId};
   </insert>
   <select id="getParentOf" resultType="java.lang.Integer" parameterType="tree.PathDivisionRepository$PathDivision">
     SELECT other.id FROM division_path AS other
