@@ -11,3 +11,15 @@ CREATE TABLE division_path (
   id INTEGER NOT NULL PRIMARY KEY,
   path TEXT NOT NULL
 );
+
+CREATE TABLE division_closure (
+  id INTEGER NOT NULL PRIMARY KEY
+);
+
+CREATE TABLE division_closure_path (
+  ancestor INTEGER NOT NULL,
+  descendant INTEGER NOT NULL,
+  PRIMARY KEY(ancestor, descendant),
+  FOREIGN KEY(ancestor) REFERENCES division_closure (id),
+  FOREIGN KEY(descendant) REFERENCES division_closure (id)
+);
