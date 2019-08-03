@@ -28,7 +28,6 @@ public class PathDivisionRepository extends DivisionRepository {
 
     public void addDivision(int id, Integer parentId) {
         try (SqlSession session = factory.openSession()) {
-            // String parentPath = parentId == null ? "" : session.selectOne("tree.PathDivisionMapper.getPathOf", parentId);
             session.insert("tree.PathDivisionMapper.addDivision", new PathDivision(id, parentId));
             session.commit();
         }
