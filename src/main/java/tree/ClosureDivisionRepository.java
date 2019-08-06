@@ -30,7 +30,7 @@ public class ClosureDivisionRepository extends DivisionRepository {
 
     public List<Integer> getAncestorsOf(int id) {
         try (SqlSession session = factory.openSession()) {
-            throw new UnsupportedOperationException();
+            return session.selectList("tree.ClosureDivisionMapper.getAncestorsOf", id);
         }
     }
 

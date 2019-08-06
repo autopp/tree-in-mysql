@@ -56,8 +56,8 @@ abstract class DivisionRepositoryTestBase {
     void getAncestorsOf() {
         dbSetupTracker.skipNextLaunch();
         assertThat(repository.getAncestorsOf(1), is(empty()));
-        assertThat(repository.getAncestorsOf(2), is(contains(1)));
-        assertThat(repository.getAncestorsOf(5), is(contains(3, 1)));
+        assertThat(repository.getAncestorsOf(2), is(containsInAnyOrder(1)));
+        assertThat(repository.getAncestorsOf(5), is(containsInAnyOrder(3, 1)));
     }
 
     @Test

@@ -3,6 +3,10 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tree.ClosureDivisionMapper">
+  <select id="getAncestorsOf" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+    SELECT ancestor FROM division_closure_path
+      WHERE descendant = #{id} AND ancestor != #{id}
+  </select>
   <select id="getDescendantsOf" resultType="java.lang.Integer" parameterType="java.lang.Integer">
     SELECT descendant FROM division_closure_path
       WHERE ancestor = #{id} AND descendant != #{id};
