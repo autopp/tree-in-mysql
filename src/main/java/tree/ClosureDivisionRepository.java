@@ -16,9 +16,20 @@ public class ClosureDivisionRepository extends DivisionRepository {
         super(factory);
     }
 
+    public static class Division {
+        public final int id;
+        public final Integer parentId;
+
+        public Division(int id, Integer parentId) {
+            this.id = id;
+            this.parentId = parentId;
+        }
+    }
     public void addDivision(int id, Integer parentId) {
         try (SqlSession session = factory.openSession()) {
-            throw new UnsupportedOperationException();
+            session.insert("tree.ClosureDivisionMapper.addDivision", id);
+            session.insert("tree.ClosureDivisionMapper.addDivisionPath", new Division(id, parentId));
+            session.commit();
         }
     }
 
