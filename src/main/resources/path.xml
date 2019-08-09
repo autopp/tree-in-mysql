@@ -9,8 +9,7 @@
   <select id="getParentOf" resultType="java.lang.Integer" parameterType="tree.PathDivisionRepository$PathDivision">
     SELECT other.id FROM division_path AS other
       INNER JOIN division_path AS own ON own.id = #{id}
-      WHERE own.path LIKE CONCAT(other.path, '%') AND other.id != #{id}
-      AND other.path = LEFT(own.path, LOCATE(CONCAT('/', own.id, '/'), own.path))
+      WHERE other.path = LEFT(own.path, LOCATE(CONCAT('/', own.id, '/'), own.path))
   </select>
   <select id="getAncestorsOf" resultType="java.lang.Integer" parameterType="tree.PathDivisionRepository$PathDivision">
     SELECT other.id FROM division_path AS other
