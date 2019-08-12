@@ -53,18 +53,18 @@ public class NaiveDivisionRepository extends DivisionRepository {
         return list;
     }
 
-    public List<Integer> getChildsOf(int id) {
+    public List<Integer> getChildrenOf(int id) {
         try (SqlSession session = factory.openSession()) {
-            return session.selectList("tree.NaiveDivisionMapper.getChildsOf", id);
+            return session.selectList("tree.NaiveDivisionMapper.getChildrenOf", id);
         }
     }
 
     public List<Integer> getDescendantsOf(int id) {
         List<Integer> list = new ArrayList<Integer>();
 
-        List<Integer> childs = getChildsOf(id);
-        list.addAll(childs);
-        list.addAll(childs.stream().flatMap((c) -> getDescendantsOf(c).stream()).collect(Collectors.toList()));
+        List<Integer> Children = getChildrenOf(id);
+        list.addAll(Children);
+        list.addAll(Children.stream().flatMap((c) -> getDescendantsOf(c).stream()).collect(Collectors.toList()));
 
         return list;
     }

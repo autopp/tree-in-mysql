@@ -45,7 +45,7 @@ public class ClosureDivisionRepository extends DivisionRepository {
         }
     }
 
-    public List<Integer> getChildsOf(int id) {
+    public List<Integer> getChildrenOf(int id) {
         try (SqlSession session = factory.openSession()) {
             throw new UnsupportedOperationException();
         }

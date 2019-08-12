@@ -17,7 +17,7 @@
       WHERE own.path LIKE CONCAT(other.path, '%') AND other.id != #{id}
       ORDER BY other.path DESC;
   </select>
-  <select id="getChildsOf" resultType="java.lang.Integer" parameterType="tree.PathDivisionRepository$PathDivision">
+  <select id="getChildrenOf" resultType="java.lang.Integer" parameterType="tree.PathDivisionRepository$PathDivision">
     SELECT other.id FROM division_path AS other
       INNER JOIN division_path AS own ON own.id = #{id}
       WHERE other.path LIKE CONCAT(own.path, '%') AND other.id != #{id}

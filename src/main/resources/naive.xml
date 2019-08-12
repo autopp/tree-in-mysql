@@ -9,7 +9,7 @@
   <select id="getParentOf" resultType="java.lang.Integer">
     SELECT d1.id FROM division_naive d1 LEFT OUTER JOIN division_naive d2 ON d1.id = d2.parent_id WHERE d2.id = #{id};
   </select>
-  <select id="getChildsOf" resultType="java.lang.Integer">
+  <select id="getChildrenOf" resultType="java.lang.Integer">
     SELECT id FROM division_naive WHERE parent_id = #{id};
   </select>
 </mapper>

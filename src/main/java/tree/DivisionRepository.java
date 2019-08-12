@@ -12,6 +12,6 @@ public abstract class DivisionRepository {
     abstract public void addDivision(int id, Integer parentId);
     abstract public Integer getParentOf(int id);
     abstract public List<Integer> getAncestorsOf(int id);
-    abstract public List<Integer> getChildsOf(int id);
+    abstract public List<Integer> getChildrenOf(int id);
     abstract public List<Integer> getDescendantsOf(int id);
 }

@@ -61,10 +61,10 @@ abstract class DivisionRepositoryTestBase {
     }
 
     @Test
-    void getChildsOf() {
+    void getChildrenOf() {
         dbSetupTracker.skipNextLaunch();
-        assertThat(repository.getChildsOf(1), is(contains(2, 3)));
-        assertThat(repository.getChildsOf(2), is(empty()));
+        assertThat(repository.getChildrenOf(1), is(contains(2, 3)));
+        assertThat(repository.getChildrenOf(2), is(empty()));
     }
 
     @Test
@@ -77,6 +77,6 @@ abstract class DivisionRepositoryTestBase {
     @Test
     void addDivision() {
         repository.addDivision(6, 1);
-        assertThat(repository.getChildsOf(1), is(contains(2, 3, 6)));
+        assertThat(repository.getChildrenOf(1), is(contains(2, 3, 6)));
     }
 }
