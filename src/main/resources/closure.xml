@@ -13,6 +13,14 @@
       UNION ALL
       SELECT #{id}, #{id};
   </insert>
+  <select id="getParentOf" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+    SELECT ancestor FROM division_closure_path
+      WHERE descendant IN (
+        SELECT ancestor FROM division_closure_path
+          WHERE descendant = #{id} AND ancestor != #{id}
+      )
+      GROUP BY ancestor ORDER BY COUNT(*) LIMIT 1;
+  </select>
   <select id="getAncestorsOf" resultType="java.lang.Integer" parameterType="java.lang.Integer">
     SELECT ancestor FROM division_closure_path
       WHERE descendant = #{id} AND ancestor != #{id}

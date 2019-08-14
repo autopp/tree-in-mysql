@@ -35,7 +35,7 @@ public class ClosureDivisionRepository extends DivisionRepository {
 
     public Integer getParentOf(int id) {
         try (SqlSession session = factory.openSession()) {
-            throw new UnsupportedOperationException();
+            return session.selectOne("tree.ClosureDivisionMapper.getParentOf", id);
         }
     }
 
