@@ -1,5 +1,7 @@
 DROP TABLE IF EXISTS division_naive;
 DROP TABLE IF EXISTS division_path;
+DROP TABLE IF EXISTS division_closure_path;
+DROP TABLE IF EXISTS division_closure;
 
 CREATE TABLE division_naive (
   id INTEGER NOT NULL PRIMARY KEY,
@@ -13,7 +15,8 @@ CREATE TABLE division_path (
 );
 
 CREATE TABLE division_closure (
-  id INTEGER NOT NULL PRIMARY KEY
+  id INTEGER NOT NULL PRIMARY KEY,
+  depth INTEGER NOT NULL
 );
 
 CREATE TABLE division_closure_path (
