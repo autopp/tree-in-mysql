@@ -27,8 +27,9 @@ public class ClosureDivisionRepository extends DivisionRepository {
     }
     public void addDivision(int id, Integer parentId) {
         try (SqlSession session = factory.openSession()) {
-            session.insert("tree.ClosureDivisionMapper.addDivision", id);
-            session.insert("tree.ClosureDivisionMapper.addDivisionPath", new Division(id, parentId));
+            Division division = new Division(id, parentId);
+            session.insert("tree.ClosureDivisionMapper.addDivision", division);
+            session.insert("tree.ClosureDivisionMapper.addDivisionPath", division);
             session.commit();
         }
     }
@@ -47,7 +48,7 @@ public class ClosureDivisionRepository extends DivisionRepository {
 
     public List<Integer> getChildrenOf(int id) {
         try (SqlSession session = factory.openSession()) {
-            throw new UnsupportedOperationException();
+            return session.selectList("tree.ClosureDivisionMapper.getChildrenOf", id);
         }
     }
 

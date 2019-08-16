@@ -3,8 +3,18 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tree.ClosureDivisionMapper">
-  <insert id="addDivision" parameterType="java.lang.Integer">
-    INSERT INTO division_closure (id) VALUES (#{id});
+  <insert id="addDivision" parameterType="tree.ClosureDivisionRepository$Division">
+    INSERT INTO division_closure (id, depth)
+    <choose>
+      <when test="parentId != null">
+        SELECT #{id}, parent.depth + 1 FROM division_closure AS parent
+          WHERE parent.id = #{parentId}
+      </when>
+      <otherwise>
+        VALUES (#{id}, 1)
+      </otherwise>
+    </choose>
+    ;
   </insert>
   <insert id="addDivisionPath" parameterType="tree.ClosureDivisionRepository$Division">
     INSERT INTO division_closure_path (ancestor, descendant)
