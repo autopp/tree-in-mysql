@@ -77,6 +77,7 @@ abstract class DivisionRepositoryTestBase {
     @Test
     void addDivision() {
         repository.addDivision(6, 1);
-        assertThat(repository.getChildrenOf(1), is(contains(2, 3, 6)));
+        assertThat(repository.getDescendantsOf(1), is(containsInAnyOrder(2, 3, 4, 5, 6)));
+        assertThat(repository.getAncestorsOf(6), is(containsInAnyOrder(1)));
     }
 }
