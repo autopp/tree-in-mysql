@@ -25,8 +25,8 @@ class ClosureDivisionRepositoryTest extends DivisionRepositoryTestBase {
     void setup() {
         Operation operation = sequenceOf(
             deleteAllFrom("division_closure_path", "division_closure"),
-            insertInto("division_closure").columns("id")
-                .values(1).values(2).values(3).values(4).values(5).build(),
+            insertInto("division_closure").columns("id", "depth")
+                .values(1, 1).values(2, 2).values(3, 2).values(4, 3).values(5, 3).build(),
             insertInto("division_closure_path").columns("ancestor", "descendant")
                 .values(1, 1).values(1, 2).values(2, 2).values(1, 3).values(3, 3)
                 .values(1, 4).values(3, 4).values(4, 4).values(1, 5).values(3, 5).values(5, 5).build()
