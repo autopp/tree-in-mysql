@@ -29,6 +29,12 @@
       LEFT JOIN division_closure own ON own.id = #{id}
       WHERE descendant = #{id} AND other.depth = own.depth - 1;
   </select>
+  <select id="getChildrenOf" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+    SELECT descendant FROM division_closure_path
+      LEFT JOIN division_closure other ON descendant = other.id
+      LEFT JOIN division_closure own ON own.id = #{id}
+      WHERE ancestor = #{id} AND other.depth = own.depth + 1;
+  </select>
   <select id="getAncestorsOf" resultType="java.lang.Integer" parameterType="java.lang.Integer">
     SELECT ancestor FROM division_closure_path
       WHERE descendant = #{id} AND ancestor != #{id}
