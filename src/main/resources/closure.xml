@@ -4,10 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tree.ClosureDivisionMapper">
   <insert id="addDivision" parameterType="tree.ClosureDivisionRepository$Division">
-    INSERT INTO division_closure (id, depth)
+    INSERT INTO tree_closure (id, depth)
     <choose>
       <when test="parentId != null">
-        SELECT #{id}, parent.depth + 1 FROM division_closure AS parent
+        SELECT #{id}, parent.depth + 1 FROM tree_closure AS parent
           WHERE parent.id = #{parentId}
       </when>
       <otherwise>
@@ -17,30 +17,30 @@
     ;
   </insert>
   <insert id="addDivisionPath" parameterType="tree.ClosureDivisionRepository$Division">
-    INSERT INTO division_closure_path (ancestor, descendant)
-      SELECT other.ancestor, #{id} FROM division_closure_path AS other
+    INSERT INTO tree_closure_path (ancestor, descendant)
+      SELECT other.ancestor, #{id} FROM tree_closure_path AS other
         WHERE other.descendant = #{parentId}
       UNION ALL
       SELECT #{id}, #{id};
   </insert>
   <select id="getParentOf" resultType="java.lang.Integer" parameterType="java.lang.Integer">
-    SELECT ancestor FROM division_closure_path
-      LEFT JOIN division_closure other ON ancestor = other.id
-      LEFT JOIN division_closure own ON own.id = #{id}
+    SELECT ancestor FROM tree_closure_path
+      LEFT JOIN tree_closure other ON ancestor = other.id
+      LEFT JOIN tree_closure own ON own.id = #{id}
       WHERE descendant = #{id} AND other.depth = own.depth - 1;
   </select>
   <select id="getChildrenOf" resultType="java.lang.Integer" parameterType="java.lang.Integer">
-    SELECT descendant FROM division_closure_path
-      LEFT JOIN division_closure other ON descendant = other.id
-      LEFT JOIN division_closure own ON own.id = #{id}
+    SELECT descendant FROM tree_closure_path
+      LEFT JOIN tree_closure other ON descendant = other.id
+      LEFT JOIN tree_closure own ON own.id = #{id}
       WHERE ancestor = #{id} AND other.depth = own.depth + 1;
   </select>
   <select id="getAncestorsOf" resultType="java.lang.Integer" parameterType="java.lang.Integer">
-    SELECT ancestor FROM division_closure_path
+    SELECT ancestor FROM tree_closure_path
       WHERE descendant = #{id} AND ancestor != #{id}
   </select>
   <select id="getDescendantsOf" resultType="java.lang.Integer" parameterType="java.lang.Integer">
-    SELECT descendant FROM division_closure_path
+    SELECT descendant FROM tree_closure_path
       WHERE ancestor = #{id} AND descendant != #{id};
   </select>
 </mapper>

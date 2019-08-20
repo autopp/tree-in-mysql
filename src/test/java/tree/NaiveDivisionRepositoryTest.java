@@ -24,8 +24,8 @@ class NaiveDivisionRepositoryTest extends DivisionRepositoryTestBase {
     @BeforeEach
     void setup() {
         Operation operation = sequenceOf(
-            truncate("division_naive"),
-            insertInto("division_naive").columns("id", "parent_id")
+            truncate("tree_naive"),
+            insertInto("tree_naive").columns("id", "parent_id")
                 .values(1, null).values(2, 1).values(3, 1).values(4, 3).values(5, 3).build()
         );
         DbSetup dbSetup = new DbSetup(dest, operation);

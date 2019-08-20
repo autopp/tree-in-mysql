@@ -24,8 +24,8 @@ class PathDivisionRepositoryTest extends DivisionRepositoryTestBase {
     @BeforeEach
     void setup() {
         Operation operation = sequenceOf(
-            truncate("division_path"),
-            insertInto("division_path").columns("id", "path")
+            truncate("tree_path"),
+            insertInto("tree_path").columns("id", "path")
                 .values(1, "1/").values(2, "1/2/").values(3, "1/3/").values(4, "1/3/4/").values(5, "1/3/5/").build()
         );
         DbSetup dbSetup = new DbSetup(dest, operation);

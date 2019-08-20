@@ -4,12 +4,12 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tree.NaiveDivisionMapper">
   <insert id="addDivision" parameterType="tree.NaiveDivisionRepository$NaiveDivision">
-    INSERT INTO division_naive (id, parent_id) VALUES (#{id}, #{parentId});
+    INSERT INTO tree_naive (id, parent_id) VALUES (#{id}, #{parentId});
   </insert>
   <select id="getParentOf" resultType="java.lang.Integer">
-    SELECT d1.id FROM division_naive d1 LEFT OUTER JOIN division_naive d2 ON d1.id = d2.parent_id WHERE d2.id = #{id};
+    SELECT d1.id FROM tree_naive d1 LEFT OUTER JOIN tree_naive d2 ON d1.id = d2.parent_id WHERE d2.id = #{id};
   </select>
   <select id="getChildrenOf" resultType="java.lang.Integer">
-    SELECT id FROM division_naive WHERE parent_id = #{id};
+    SELECT id FROM tree_naive WHERE parent_id = #{id};
   </select>
 </mapper>
