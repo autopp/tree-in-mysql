@@ -1,18 +1,11 @@
 package tree;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
-import org.apache.ibatis.annotations.Insert;
-
-public class PathDivisionRepository extends DivisionRepository {
-    public PathDivisionRepository(SqlSessionFactory factory) {
+public class PathTreeRepository extends TreeRepository {
+    public PathTreeRepository(SqlSessionFactory factory) {
         super(factory);
     }
 

@@ -3,9 +3,9 @@ package tree;
 import java.util.List;
 import org.apache.ibatis.session.SqlSessionFactory;
 
-public abstract class DivisionRepository {
+public abstract class TreeRepository {
     protected SqlSessionFactory factory;
-    public DivisionRepository(SqlSessionFactory factory) {
+    public TreeRepository(SqlSessionFactory factory) {
         this.factory = factory;
     };
 

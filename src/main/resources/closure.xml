@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tree.ClosureDivisionMapper">
-  <insert id="addDivision" parameterType="tree.ClosureDivisionRepository$Division">
+  <insert id="addDivision" parameterType="tree.ClosureTreeRepository$Division">
     INSERT INTO tree_closure (id, depth)
     <choose>
       <when test="parentId != null">
@@ -16,7 +16,7 @@
     </choose>
     ;
   </insert>
-  <insert id="addDivisionPath" parameterType="tree.ClosureDivisionRepository$Division">
+  <insert id="addDivisionPath" parameterType="tree.ClosureTreeRepository$Division">
     INSERT INTO tree_closure_path (ancestor, descendant)
       SELECT other.ancestor, #{id} FROM tree_closure_path AS other
         WHERE other.descendant = #{parentId}

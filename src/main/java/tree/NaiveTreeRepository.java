@@ -2,15 +2,12 @@ package tree;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
-import org.apache.ibatis.annotations.Insert;
-
-public class NaiveDivisionRepository extends DivisionRepository {
-    public NaiveDivisionRepository(SqlSessionFactory factory) {
+public class NaiveTreeRepository extends TreeRepository {
+    public NaiveTreeRepository(SqlSessionFactory factory) {
         super(factory);
     }
 
