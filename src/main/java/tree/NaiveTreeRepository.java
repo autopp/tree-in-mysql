@@ -11,11 +11,11 @@ public class NaiveTreeRepository extends TreeRepository {
         super(factory);
     }
 
-    public static class NaiveDivision {
+    public static class NaiveNode {
         public int id;
         public Integer parentId;
 
-        public NaiveDivision(int id, Integer parentId) {
+        public NaiveNode(int id, Integer parentId) {
             this.id = id;
             this.parentId = parentId;
         }
@@ -23,7 +23,7 @@ public class NaiveTreeRepository extends TreeRepository {
 
     public void addDivision(int id, Integer parentId) {
         try (SqlSession session = factory.openSession()) {
-            session.insert("tree.NaiveTreeMapper.addDivision", new NaiveDivision(id, parentId));
+            session.insert("tree.NaiveTreeMapper.addDivision", new NaiveNode(id, parentId));
             session.commit();
         }
     }

@@ -9,18 +9,18 @@ public class ClosureTreeRepository extends TreeRepository {
         super(factory);
     }
 
-    public static class Division {
+    public static class ClosureNode {
         public final int id;
         public final Integer parentId;
 
-        public Division(int id, Integer parentId) {
+        public ClosureNode(int id, Integer parentId) {
             this.id = id;
             this.parentId = parentId;
         }
     }
     public void addDivision(int id, Integer parentId) {
         try (SqlSession session = factory.openSession()) {
-            Division division = new Division(id, parentId);
+            ClosureNode division = new ClosureNode(id, parentId);
             session.insert("tree.ClosureTreeMapper.addDivision", division);
             session.insert("tree.ClosureTreeMapper.addDivisionPath", division);
             session.commit();

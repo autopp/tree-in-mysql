@@ -3,27 +3,27 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tree.PathTreeMapper">
-  <insert id="addDivision" parameterType="tree.PathTreeRepository$PathDivision">
+  <insert id="addDivision" parameterType="tree.PathTreeRepository$PathNode">
     INSERT INTO tree_path (id, path) SELECT #{id}, CONCAT(parent.path, '/', #{id}) FROM tree_path AS parent where parent.id = #{parentId};
   </insert>
-  <select id="getParentOf" resultType="java.lang.Integer" parameterType="tree.PathTreeRepository$PathDivision">
+  <select id="getParentOf" resultType="java.lang.Integer" parameterType="tree.PathTreeRepository$PathNode">
     SELECT other.id FROM tree_path AS other
       INNER JOIN tree_path AS own ON own.id = #{id}
       WHERE other.path = LEFT(own.path, LOCATE(CONCAT('/', own.id, '/'), own.path))
   </select>
-  <select id="getAncestorsOf" resultType="java.lang.Integer" parameterType="tree.PathTreeRepository$PathDivision">
+  <select id="getAncestorsOf" resultType="java.lang.Integer" parameterType="tree.PathTreeRepository$PathNode">
     SELECT other.id FROM tree_path AS other
       INNER JOIN tree_path AS own ON own.id = #{id}
       WHERE own.path LIKE CONCAT(other.path, '%') AND other.id != #{id}
       ORDER BY other.path DESC;
   </select>
-  <select id="getChildrenOf" resultType="java.lang.Integer" parameterType="tree.PathTreeRepository$PathDivision">
+  <select id="getChildrenOf" resultType="java.lang.Integer" parameterType="tree.PathTreeRepository$PathNode">
     SELECT other.id FROM tree_path AS other
       INNER JOIN tree_path AS own ON own.id = #{id}
       WHERE other.path LIKE CONCAT(own.path, '%') AND other.id != #{id}
         AND LENGTH(other.path) - LENGTH(REPLACE(other.path, '/', '')) = LENGTH(own.path) - LENGTH(REPLACE(own.path, '/', '')) + 1;
   </select>
-  <select id="getDescendantsOf" resultType="java.lang.Integer" parameterType="tree.PathTreeRepository$PathDivision">
+  <select id="getDescendantsOf" resultType="java.lang.Integer" parameterType="tree.PathTreeRepository$PathNode">
     SELECT other.id FROM tree_path AS other
       INNER JOIN tree_path AS own ON own.id = #{id}
       WHERE other.path LIKE CONCAT(own.path, '%') AND other.id != #{id};

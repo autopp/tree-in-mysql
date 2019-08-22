@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tree.NaiveTreeMapper">
-  <insert id="addDivision" parameterType="tree.NaiveTreeRepository$NaiveDivision">
+  <insert id="addDivision" parameterType="tree.NaiveTreeRepository$NaiveNode">
     INSERT INTO tree_naive (id, parent_id) VALUES (#{id}, #{parentId});
   </insert>
   <select id="getParentOf" resultType="java.lang.Integer">
