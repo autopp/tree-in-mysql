@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="tree.PathDivisionMapper">
+<mapper namespace="tree.PathTreeMapper">
   <insert id="addDivision" parameterType="tree.PathTreeRepository$PathDivision">
     INSERT INTO tree_path (id, path) SELECT #{id}, CONCAT(parent.path, '/', #{id}) FROM tree_path AS parent where parent.id = #{parentId};
   </insert>

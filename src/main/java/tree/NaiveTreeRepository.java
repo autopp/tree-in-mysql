@@ -23,14 +23,14 @@ public class NaiveTreeRepository extends TreeRepository {
 
     public void addDivision(int id, Integer parentId) {
         try (SqlSession session = factory.openSession()) {
-            session.insert("tree.NaiveDivisionMapper.addDivision", new NaiveDivision(id, parentId));
+            session.insert("tree.NaiveTreeMapper.addDivision", new NaiveDivision(id, parentId));
             session.commit();
         }
     }
 
     public Integer getParentOf(int id) {
         try (SqlSession session = factory.openSession()) {
-            return session.selectOne("tree.NaiveDivisionMapper.getParentOf", id);
+            return session.selectOne("tree.NaiveTreeMapper.getParentOf", id);
         }
     }
 
@@ -52,7 +52,7 @@ public class NaiveTreeRepository extends TreeRepository {
 
     public List<Integer> getChildrenOf(int id) {
         try (SqlSession session = factory.openSession()) {
-            return session.selectList("tree.NaiveDivisionMapper.getChildrenOf", id);
+            return session.selectList("tree.NaiveTreeMapper.getChildrenOf", id);
         }
     }
 

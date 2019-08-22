@@ -21,33 +21,33 @@ public class ClosureTreeRepository extends TreeRepository {
     public void addDivision(int id, Integer parentId) {
         try (SqlSession session = factory.openSession()) {
             Division division = new Division(id, parentId);
-            session.insert("tree.ClosureDivisionMapper.addDivision", division);
-            session.insert("tree.ClosureDivisionMapper.addDivisionPath", division);
+            session.insert("tree.ClosureTreeMapper.addDivision", division);
+            session.insert("tree.ClosureTreeMapper.addDivisionPath", division);
             session.commit();
         }
     }
 
     public Integer getParentOf(int id) {
         try (SqlSession session = factory.openSession()) {
-            return session.selectOne("tree.ClosureDivisionMapper.getParentOf", id);
+            return session.selectOne("tree.ClosureTreeMapper.getParentOf", id);
         }
     }
 
     public List<Integer> getAncestorsOf(int id) {
         try (SqlSession session = factory.openSession()) {
-            return session.selectList("tree.ClosureDivisionMapper.getAncestorsOf", id);
+            return session.selectList("tree.ClosureTreeMapper.getAncestorsOf", id);
         }
     }
 
     public List<Integer> getChildrenOf(int id) {
         try (SqlSession session = factory.openSession()) {
-            return session.selectList("tree.ClosureDivisionMapper.getChildrenOf", id);
+            return session.selectList("tree.ClosureTreeMapper.getChildrenOf", id);
         }
     }
 
     public List<Integer> getDescendantsOf(int id) {
         try (SqlSession session = factory.openSession()) {
-            return session.selectList("tree.ClosureDivisionMapper.getDescendantsOf", id);
+            return session.selectList("tree.ClosureTreeMapper.getDescendantsOf", id);
         }
     }
 }

@@ -21,32 +21,32 @@ public class PathTreeRepository extends TreeRepository {
 
     public void addDivision(int id, Integer parentId) {
         try (SqlSession session = factory.openSession()) {
-            session.insert("tree.PathDivisionMapper.addDivision", new PathDivision(id, parentId));
+            session.insert("tree.PathTreeMapper.addDivision", new PathDivision(id, parentId));
             session.commit();
         }
     }
 
     public Integer getParentOf(int id) {
         try (SqlSession session = factory.openSession()) {
-            return session.selectOne("tree.PathDivisionMapper.getParentOf", new PathDivision(id, null));
+            return session.selectOne("tree.PathTreeMapper.getParentOf", new PathDivision(id, null));
         }
     }
 
     public List<Integer> getAncestorsOf(int id) {
         try (SqlSession session = factory.openSession()) {
-            return session.selectList("tree.PathDivisionMapper.getAncestorsOf", new PathDivision(id, null));
+            return session.selectList("tree.PathTreeMapper.getAncestorsOf", new PathDivision(id, null));
         }
     }
 
     public List<Integer> getChildrenOf(int id) {
         try (SqlSession session = factory.openSession()) {
-            return session.selectList("tree.PathDivisionMapper.getChildrenOf", new PathDivision(id, null));
+            return session.selectList("tree.PathTreeMapper.getChildrenOf", new PathDivision(id, null));
         }
     }
 
     public List<Integer> getDescendantsOf(int id) {
         try (SqlSession session = factory.openSession()) {
-            return session.selectList("tree.PathDivisionMapper.getDescendantsOf", new PathDivision(id, null));
+            return session.selectList("tree.PathTreeMapper.getDescendantsOf", new PathDivision(id, null));
         }
     }
 }
